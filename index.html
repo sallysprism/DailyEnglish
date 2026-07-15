@@ -52,6 +52,8 @@ input[type=radio]{display:none}
 .qchip{font-size:13px;font-weight:600;color:#7a6a3a;background:#f0efe9;border:1px solid #e5e4de;border-radius:16px;padding:6px 12px;white-space:nowrap;cursor:pointer;user-select:none}
 .qchip:active{background:#c96f4a;color:#fff;border-color:#c96f4a}
 .cat{scroll-margin-top:12px}
+.totop{position:fixed;bottom:20px;right:max(16px,calc(50% - 224px));z-index:50;padding:10px 16px;border-radius:22px;border:none;background:#c96f4a;color:#fff;font-size:14px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.28);cursor:pointer;display:none}
+.totop.show{display:block}
 </style>
 </head>
 <body>
@@ -92,6 +94,13 @@ sec.insertBefore(nav,sec.firstChild);
 }
 buildNav(document.getElementById('sec-p'));
 buildNav(document.getElementById('sec-d'));
+var top=document.createElement('button');
+top.type='button';
+top.className='totop';
+top.textContent='↑ 위로';
+top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+document.body.appendChild(top);
+window.addEventListener('scroll',function(){top.classList.toggle('show',window.scrollY>300);});
 })();
 var q=document.getElementById('q');
 if(q){q.addEventListener('input',function(){
